@@ -17,7 +17,8 @@ defmodule StaticBlog.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {StaticBlog, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
+          :timex, :yamerl]]
   end
 
   # Specifies which paths to compile per environment.
@@ -33,6 +34,9 @@ defmodule StaticBlog.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:earmark, "~> 0.2.0"},
+     {:timex, "~> 2.1.4"},
+     {:yamerl, github: "yakaz/yamerl"}]
   end
 end
