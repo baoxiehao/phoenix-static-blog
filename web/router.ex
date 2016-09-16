@@ -18,7 +18,13 @@ defmodule StaticBlog.Router do
 
     get "/", PageController, :index
 
-    get "/:slug", PostController, :show
+    get "/post/:path", PostController, :show
+
+    get "/archive", ArchiveController, :index
+
+    get "/gallery", GalleryController, :index
+
+    get "/about", AboutController, :index
   end
 
   # Other scopes may use custom stacks.

@@ -6,20 +6,20 @@ defmodule StaticBlog.Repo do
   end
 
   def init(:ok) do
-    posts = StaticBlog.Crawler.crawl
+    posts = StaticBlog.Crawler.crawl_post("priv/posts")
     {:ok, posts}
   end
 
-  def get_by_slug(slug) do
-    GenServer.call(__MODULE__, {:get_by_slug, slug})
+  def get_by_path(path) do
+    GenServer.call(__MODULE__, {:get_by_path, path})
   end
 
   def list() do
     GenServer.call(__MODULE__, {:list})
   end
 
-  def handle_call({:get_by_slug, slug}, _from, posts) do
-    case Enum.find(posts, fn(x) -> x.slug == slug end) do
+  def handle_call({:get_by_path, path}, _from, posts) do
+    case Enum.find(posts, fn(x) -> x.path == path end) do
       nil -> {:reply, :not_found, posts}
       post -> {:reply, {:ok, post}, posts}
     end

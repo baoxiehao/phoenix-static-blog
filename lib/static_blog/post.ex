@@ -1,24 +1,24 @@
 defmodule StaticBlog.Post do
-  defstruct slug: "", title: "", date: "", intro: "", content: ""
+  defstruct path: "", title: "", date: "", intro: "", content: ""
 
-  def compile(file) do
+  def compile(dir, file) do
     post = %StaticBlog.Post{
-      slug: file_to_slug(file)
+      path: file_to_path(file)
     }
 
-    Path.join(["priv/posts", file])
+    Path.join([dir, file])
     |> File.read!
     |> split
     |> extract(post)
   end
 
-  defp file_to_slug(file) do
-   String.replace(file, ~r/\.md$/, "")
- end
+  defp file_to_path(file) do
+    String.replace(file, ~r/\.md$/, "")
+  end
 
- defp split(data) do
-    [frontmatter, markdown] = String.split(data, ~r/\n-{3,}\n/, parts: 2)
-    {parse_yaml(frontmatter), Earmark.to_html(markdown)}
+ defp split(blog) do
+    [yaml, markdown] = String.split(blog, ~r/\n-{3,}\n/, parts: 2)
+    {parse_yaml(yaml), Earmark.to_html(markdown)}
   end
 
   defp parse_yaml(yaml) do

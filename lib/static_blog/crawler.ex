@@ -1,7 +1,10 @@
 defmodule StaticBlog.Crawler do
-  def crawl do
-    File.ls!("priv/posts")
-    |> Enum.map(&StaticBlog.Post.compile/1)
+
+  def crawl_post(dir) do
+    File.ls!(dir)
+    |> Enum.filter(&String.ends_with?(&1, ".md"))
+    |> IO.inspect
+    |> Enum.map(&StaticBlog.Post.compile(dir, &1))
     |> Enum.sort(&sort/2)
   end
 
