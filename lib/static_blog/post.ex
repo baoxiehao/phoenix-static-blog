@@ -7,9 +7,9 @@ defmodule StaticBlog.Post do
     }
 
     Path.join([dir, file])
-    |> File.read!
-    |> split
-    |> extract(post)
+      |> File.read!
+      |> split
+      |> extract(post)
   end
 
   defp file_to_path(file) do
@@ -23,7 +23,6 @@ defmodule StaticBlog.Post do
 
   defp parse_yaml(yaml) do
     [parsed] = :yamerl_constr.string(yaml)
-    IO.inspect parsed
     parsed
   end
 

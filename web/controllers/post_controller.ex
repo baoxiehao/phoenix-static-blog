@@ -6,8 +6,8 @@ defmodule StaticBlog.PostController do
 
   def show(conn, %{"path" => path}) do
     case StaticBlog.Repo.get_by_path(path) do
-      {:ok, post} -> render conn, "show.html", post: post
       :not_found -> not_found(conn)
+      post -> render conn, "show.html", post: post
     end
   end
 

@@ -11,6 +11,7 @@ defmodule StaticBlog do
       # Start the endpoint when the application starts
       supervisor(StaticBlog.Endpoint, []),
       worker(StaticBlog.Repo, []), # <--- THIS IS THE LINE WE ADDED
+      worker(StaticBlog.Watcher, []),
       # Start your own worker by calling: StaticBlog.Worker.start_link(arg1, arg2, arg3)
       # worker(StaticBlog.Worker, [arg1, arg2, arg3]),
     ]

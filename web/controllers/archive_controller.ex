@@ -5,12 +5,10 @@ defmodule StaticBlog.ArchiveController do
   plug :put_layout, "post.html"
 
   def index(conn, _params) do
-    {:ok, posts} = StaticBlog.Repo.list()
-    render conn, "index.html", posts: posts
+    render conn, "index.html", posts: StaticBlog.Repo.list()
   end
 
   def show(conn, %{"tag" => tag}) do
-    {:ok, posts} = StaticBlog.Repo.get_by_tag(tag)
-    render conn, "index.html", posts: posts
+    render conn, "index.html", posts: StaticBlog.Repo.get_by_tag(tag)
   end
 end

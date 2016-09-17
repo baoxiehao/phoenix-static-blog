@@ -1,13 +1,14 @@
 defmodule StaticBlog.Repo do
   use GenServer
 
+  @dir "priv/posts"
+
   def start_link do
-    GenServer.start_link(__MODULE__, :ok, [name: __MODULE__])
+    GenServer.start_link(__MODULE__, nil, [name: __MODULE__])
   end
 
-  def init(:ok) do
-    posts = StaticBlog.Crawler.crawl_post("priv/posts")
-    {:ok, posts}
+  def init(_args) do
+    {:ok, update_post(File.ls!(@dir), [])}
   end
 
   def get_by_path(path) do
@@ -22,19 +23,54 @@ defmodule StaticBlog.Repo do
     GenServer.call(__MODULE__, {:list})
   end
 
+  def update(files) do
+    GenServer.cast(__MODULE__, {:update, files})
+  end
+
   def handle_call({:get_by_path, path}, _from, posts) do
-    case Enum.find(posts, fn(x) -> x.path == path end) do
+    case Enum.find(posts, fn {_file, post} -> post.path == path end) do
       nil -> {:reply, :not_found, posts}
-      post -> {:reply, {:ok, post}, posts}
+      {_file, post} -> {:reply, post, posts}
     end
   end
 
   def handle_call({:get_by_tag, tag}, _from, posts) do
-    tag_posts = Enum.filter(posts, fn post -> Enum.member?(post.tags, tag) end)
-    {:reply, {:ok, tag_posts}, posts}
+    {
+      :reply,
+      posts
+        |> Enum.filter_map(
+            fn {_file, post} -> Enum.member?(post.tags, tag) end,
+            fn {_file, post} -> post end),
+      posts
+    }
   end
 
   def handle_call({:list}, _from, posts) do
-    {:reply, {:ok, posts}, posts}
+    {
+      :reply,
+      posts |> Enum.map(fn {_file, post} -> post end),
+      posts
+    }
+  end
+
+  def handle_cast({:update, files}, posts) do
+    IO.puts "Update post: #{inspect files}"
+    {:noreply, update_post(files, posts)}
+  end
+
+  defp update_post(files, posts) do
+    new_posts =
+      files
+      |> IO.inspect # debug output
+      |> Enum.map(fn file -> {file, StaticBlog.Post.compile(@dir, file)} end)
+
+    posts
+      |> Enum.reject(fn {file, _post} -> Enum.member?(files, file) end)
+      |> Enum.concat(new_posts)
+      |> Enum.sort(&sort/2)
+  end
+
+  defp sort({_file1, post1}, {_file2, post2}) do
+    Timex.compare(post1.date, post2.date) > 0
   end
 end

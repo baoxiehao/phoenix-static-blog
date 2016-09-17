@@ -13,7 +13,7 @@
   </div>
 
   <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
-    <%= for i <- 1..1 do %>
+    <%= for _i <- 1..1 do %>
       <div class="section"></div>
     <% end %>
     <%= for tag <- @post.tags do %>
