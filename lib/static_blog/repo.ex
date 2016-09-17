@@ -14,6 +14,10 @@ defmodule StaticBlog.Repo do
     GenServer.call(__MODULE__, {:get_by_path, path})
   end
 
+  def get_by_tag(tag) do
+    GenServer.call(__MODULE__, {:get_by_tag, tag})
+  end
+
   def list() do
     GenServer.call(__MODULE__, {:list})
   end
@@ -23,6 +27,11 @@ defmodule StaticBlog.Repo do
       nil -> {:reply, :not_found, posts}
       post -> {:reply, {:ok, post}, posts}
     end
+  end
+
+  def handle_call({:get_by_tag, tag}, _from, posts) do
+    tag_posts = Enum.filter(posts, fn post -> Enum.member?(post.tags, tag) end)
+    {:reply, {:ok, tag_posts}, posts}
   end
 
   def handle_call({:list}, _from, posts) do

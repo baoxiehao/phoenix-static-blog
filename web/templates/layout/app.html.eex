@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    <!-- Materialize navigator -->
     <nav>
       <div class="nav-wrapper blue-grey">
         <div class="container">
@@ -29,12 +30,14 @@
       </div>
     </nav>
 
+    <!-- Main container -->
     <div class="container">
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
     </div>
 
+    <!-- Materialize footer -->
     <footer class="page-footer blue-grey">
       <div class="container">
         <div class="row">

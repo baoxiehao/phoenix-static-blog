@@ -1,4 +1,7 @@
 <div class="row">
+  <div class="section">
+  </div>
+
   <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
     <ul class="collapsible" data-collapsible="accordion">
        <li>

@@ -1,19 +1,4 @@
 <div class="row">
-  <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
-    <div class="section">
-      <h4><a href="#" class="grey-text text-darken-2">Blog</a></h4>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-      <h4><a href="#" class="grey-text text-darken-2">Work</a></h4>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-        <h4><a href="#" class="grey-text text-darken-2">About</a></h4>
-    </div>
-    <div class="divider"></div>
-  </div>
-
   <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
     <article>
       <h1 id="title"><%= @post.title %></h1>
@@ -25,5 +10,18 @@
     <div class="divider"></div>
     <p class="left chip grey lighten-3 hoverable"><a href="<%= page_path(@conn, :index) %>"><< Back</a></p>
     <p class="right chip grey lighten-3 hoverable"><a href="#title">Top</a></p>
+  </div>
+
+  <div class="col s12 m4 l3"> <!-- Note that "m4 l3" was added -->
+    <%= for i <- 1..1 do %>
+      <div class="section"></div>
+    <% end %>
+    <%= for tag <- @post.tags do %>
+      <p>
+        <div class="btn waves-effect waves-light blue-grey">
+          <a href="<%= archive_path(@conn, :show, tag) %>" class="white-text"><%= tag %></a>
+        </div>
+      </p>
+    <% end %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 defmodule StaticBlog.Post do
-  defstruct path: "", title: "", date: "", intro: "", content: ""
+  defstruct path: "", title: "", date: "", intro: "", tags: [], content: ""
 
   def compile(dir, file) do
     post = %StaticBlog.Post{
@@ -23,14 +23,16 @@ defmodule StaticBlog.Post do
 
   defp parse_yaml(yaml) do
     [parsed] = :yamerl_constr.string(yaml)
+    IO.inspect parsed
     parsed
   end
 
   defp extract({props, content}, post) do
     %{post |
       title: get_prop(props, "title"),
-      date: Timex.parse!(get_prop(props, "date"), "{ISOdate}"),
+      date: get_prop(props, "date") |> Timex.parse!("{ISOdate}"),
       intro: get_prop(props, "intro"),
+      tags: get_prop(props, "tags") |> String.split("@", trim: true),
       content: content}
   end
 

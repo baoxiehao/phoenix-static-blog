@@ -8,7 +8,7 @@
           <h2><%= post.title %></h2>
           <p><%= Timex.format!(post.date, "{Mshort} {D} {YYYY}") %></p>
           <p><%= post.intro %></p>
-          <p class="chip"><a class="black-text" href="<%= post_path(@conn, :show, post.path) %>">Read post >></a></p>
+          <p class="chip grey lighten-2"><a class="black-text" href="<%= post_path(@conn, :show, post.path) %>">Read post >></a></p>
         </div>
       </div>
     </div>
