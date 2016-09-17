@@ -23,6 +23,7 @@
     </article>
 
     <div class="divider"></div>
-    <p class="left"><a href="<%= page_path(@conn, :index) %>"><< Back</a></p>
-    <p class="right"><a href="#title">Top</a></p>
+    <p class="left chip grey lighten-3 hoverable"><a href="<%= page_path(@conn, :index) %>"><< Back</a></p>
+    <p class="right chip grey lighten-3 hoverable"><a href="#title">Top</a></p>
+  </div>
 </div>

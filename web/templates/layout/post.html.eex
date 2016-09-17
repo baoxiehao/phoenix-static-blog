@@ -35,31 +35,6 @@
       </main>
     </div>
 
-    <footer class="page-footer blue-grey">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Be a better man</h5>
-            <p class="grey-text text-lighten-4">Read more and code more.</p>
-          </div>
-          <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
-            <ul>
-              <li><a class="grey-text text-lighten-3" href="http://elixir-lang.org">Elixir</a></li>
-              <li><a class="grey-text text-lighten-3" href="http://www.phoenixframework.org">Phoenix</a></li>
-              <li><a class="grey-text text-lighten-3" href="http://materializecss.com">Materialize</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        <div class="container">
-          © 2016 Elixon
-          <a class="grey-text text-lighten-4 right" href="http://github.com/baoxiehao">Github</a>
-        </div>
-      </div>
-    </footer>
-
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

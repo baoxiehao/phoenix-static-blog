@@ -1,16 +1,8 @@
-<div class="section">  
+<div class="section">
 </div>
 
-<div class="slider">
-  <ul class="slides">
-    <%= for image <- @images do %>
-    <li>
-      <img src="<%= static_path(@conn, "/assets/images/#{image}") %>">
-      <div class="caption center-align">
-        <h3>This is our big Tagline!</h3>
-        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-      </div>
-    </li>
-    <% end %>
-  </ul>
+<div class="carousel">
+  <%= for image <- @images do %>
+    <a class="carousel-item"><img src="<%= "/images/#{image}" %>"></a>
+  <% end %>
 </div>
