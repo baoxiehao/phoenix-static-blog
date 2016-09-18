@@ -5,6 +5,8 @@ defmodule StaticBlog.GalleryController do
   plug :put_layout, "post.html"
 
   def index(conn, _params) do
-    render conn, "index.html", images: File.ls!("web/static/assets/images")
+    render conn, "index.html", images: "web/static/assets/images"
+        |> File.ls!
+        |> Enum.reject(fn file -> String.contains?(file, "self") end)
   end
 end
