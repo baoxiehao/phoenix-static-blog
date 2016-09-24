@@ -2,7 +2,7 @@
 title: Photos taken
 date: 2016-09-21
 intro: The most beautiful memories in my life.
-tags: [@Photo]
+tags: [Photo]
 ---
 
 怀念曾经的校园时光，时光静好

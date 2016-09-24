@@ -18,7 +18,7 @@ defmodule StaticBlog.Mixfile do
   def application do
     [mod: {StaticBlog, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-          :timex, :yamerl, :httpoison]]
+          :timex, :yaml_elixir, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -37,7 +37,7 @@ defmodule StaticBlog.Mixfile do
      {:cowboy, "~> 1.0"},
      {:earmark, "~> 0.2.0"},
      {:timex, "~> 2.1.4"},
-     {:yamerl, github: "yakaz/yamerl"},
+     {:yaml_elixir, "~> 1.2.1"},
      {:httpoison, "~> 0.9.0"},
      {:floki, "~> 0.10.1"}
    ]

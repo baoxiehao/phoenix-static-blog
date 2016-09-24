@@ -2,7 +2,7 @@
 title: Third post
 date: 2016-06-02
 intro: The third post is about another topic.
-tags: [@tag3, @tag4]
+tags: [tag3, tag4]
 ---
 
 This post is also written in **Markdown**.

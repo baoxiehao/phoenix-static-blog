@@ -3,29 +3,17 @@ defmodule StaticBlog.Awesome do
 
   def compile do
     Path.join("priv/awesome", "index.yaml")
-    |> File.read!
-    |> parse_yaml
+    |> YamlElixir.read_all_from_file
     |> Enum.map(&extract(&1))
   end
 
-  defp parse_yaml(yaml) do
-    :yamerl_constr.string(yaml)
-  end
-
   defp extract(props) do
-    url = get_prop(props, "url")
+    url = props["url"]
     %StaticBlog.Awesome{
       url: url,
       title: get_url_title(url),
-      tags: get_prop(props, "tags") |> String.split("@", trim: true),
+      tags: props["tags"],
     }
-  end
-
-  defp get_prop(props, key) do
-    case :proplists.get_value(String.to_char_list(key), props) do
-      :undefined -> nil
-      x -> to_string(x)
-    end
   end
 
   defp get_url_title(url) do

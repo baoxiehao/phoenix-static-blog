@@ -18,27 +18,15 @@ defmodule StaticBlog.Post do
 
  defp split(blog) do
     [yaml, markdown] = String.split(blog, ~r/\n-{3,}\n/, parts: 2)
-    {parse_yaml(yaml), Earmark.to_html(markdown)}
-  end
-
-  defp parse_yaml(yaml) do
-    [parsed] = :yamerl_constr.string(yaml)
-    parsed
+    {YamlElixir.read_from_string(yaml), Earmark.to_html(markdown)}
   end
 
   defp extract({props, content}, post) do
     %{post |
-      title: get_prop(props, "title"),
-      date: get_prop(props, "date") |> Timex.parse!("{ISOdate}"),
-      intro: get_prop(props, "intro"),
-      tags: get_prop(props, "tags") |> String.split("@", trim: true),
+      title: props["title"],
+      date: props["date"] |> Timex.parse!("{ISOdate}"),
+      intro: props["intro"],
+      tags: props["tags"],
       content: content}
-  end
-
-  defp get_prop(props, key) do
-    case :proplists.get_value(String.to_char_list(key), props) do
-      :undefined -> nil
-      x -> to_string(x)
-    end
   end
 end
