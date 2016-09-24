@@ -1,0 +1,20 @@
+<div class="section">
+</div>
+
+<%= for awesome <- @awesomes do %>
+  <div class="row">
+      <div class="col s12 m12 l12">
+        <div class="card-panel hoverable grey lighten-4 black-text">
+          <a href="<%= awesome.url %>" target="_blank"><strong><%= awesome.title %></strong></a>
+          <p>
+            <a href="<%= awesome.url %>" target="_blank" class="grey-text"><%= awesome.url %></a>
+            <%= for tag <- awesome.tags do %>
+              <span class="chip">
+                <a class="grey-text" href="<%= awesome_path(@conn, :show, tag) %>"><%= tag %></a>
+              </span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+<% end %>

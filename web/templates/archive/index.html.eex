@@ -9,7 +9,8 @@
               <p>
                 <span class="grey-text"><%= Timex.format!(post.date, "{Mshort} {D} {YYYY}") %></span>
                 <span class="grey-text"> >> </span>
-                <span class="strong"><%= post.title %></span></p>
+                <span class="strong"><%= post.title %></span>
+              </p>
             </a>
         </div>
       </div>

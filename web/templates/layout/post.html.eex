@@ -22,6 +22,7 @@
           <a href="<%= page_path(@conn, :index) %>" class="left brand-logo">Elixon</a>
           <ul class="right">
             <li><a href="<%= archive_path(@conn, :index) %>">Archive</a></li>
+            <li><a href="<%= awesome_path(@conn, :index) %>">Awesome</a></li>
             <li><a href="<%= gallery_path(@conn, :index) %>">Gallery</a></li>
             <li><a href="<%= about_path(@conn, :index) %>">About</a></li>
           </ul>

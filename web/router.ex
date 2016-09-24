@@ -23,6 +23,9 @@ defmodule StaticBlog.Router do
     get "/archive", ArchiveController, :index
     get "/archive/:tag", ArchiveController, :show
 
+    get "/awesome", AwesomeController, :index
+    get "/awesome/:tag", AwesomeController, :show
+
     get "/gallery", GalleryController, :index
 
     get "/about", AboutController, :index

@@ -5,7 +5,7 @@ defmodule StaticBlog.PostController do
   plug :put_layout, "post.html"
 
   def show(conn, %{"path" => path}) do
-    case StaticBlog.Repo.get_by_path(path) do
+    case StaticBlog.PostServer.get_by_path(path) do
       :not_found -> not_found(conn)
       post -> render conn, "show.html", post: post
     end

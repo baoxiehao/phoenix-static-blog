@@ -1,4 +1,4 @@
-defmodule StaticBlog.Repo do
+defmodule StaticBlog.PostServer do
   use GenServer
 
   @dir "priv/posts"
